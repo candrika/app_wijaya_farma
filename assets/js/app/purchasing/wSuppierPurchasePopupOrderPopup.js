@@ -68,9 +68,9 @@ Ext.define(dir_sys + 'purchasing.GridSuppierPurchasePopupOrder', {
             icon: BASE_URL + 'assets/icons/fam/arrow_right.png',
             handler: function(grid, rowIndex, colIndex, actionItem, event, selectedRecord, row) {
                 var form = Ext.getCmp('EntryPurchaseOrder').getForm();
-                form.findField("no_purchase_quote").setValue(selectedRecord.get('namesupplier')+ ' #' +selectedRecord.get('code'));
-                form.findField("idcustomer").setValue(selectedRecord.get('idsupplier'));
-                form.findField("customer_type").setValue(selectedRecord.get('supplier_type_id'));
+                form.findField("no_purchase_quote").setValue(selectedRecord.get('namecustomer'));
+                form.findField("idcustomer").setValue(selectedRecord.get('idcustomer'));
+                form.findField("customer_type").setValue(selectedRecord.get('idcustomertype'));
                
                 Ext.getCmp('wSuppierPurchasePopupOrderPopup').hide();
             }

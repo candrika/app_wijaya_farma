@@ -1,5 +1,7 @@
-Ext.create(dir_sys + 'master.GridMasterBank');
-Ext.create(dir_sys + 'master.GridMasterCurrency');
+Ext.create(dir_sys + 'account.GridDaftarAkun');
+Ext.create(dir_sys + 'setup.GridSetupTax');
+Ext.create(dir_sys + 'setup.Gridlinkedacc');
+// Ext.create(dir_sys + 'master.GridMasterCurrency');
 
 Ext.define(dir_sys + 'master.TabMasterFinancial', {
     extend: 'Ext.tab.Panel',
@@ -14,13 +16,13 @@ Ext.define(dir_sys + 'master.TabMasterFinancial', {
     },
     items: [
         {
-            xtype: 'GridTreeAcc2'
+            xtype: 'GridDaftarAkun'
         },
         {
-            xtype:'GridMasterBank'
+            xtype:'GridSetupTax'
         },
         {
-            xtype:'GridMasterCurrency'
+            xtype:'Gridlinkedacc'
         }
     ], listeners: {
         render: {

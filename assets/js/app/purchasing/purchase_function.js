@@ -185,7 +185,7 @@ function updateGridPurchasev3() {
     angkutPurchaseOrder; 
     
     
-    var isIncludeTax = Ext.getCmp('include_tax_po').getValue()*1;
+    // var isIncludeTax = Ext.getCmp('include_tax_po').getValue()*1;
     console.log(isIncludeTax)
     var storeGridItemPurchaseOrder = Ext.getCmp('GridItemEntryPurchaseOrder').getStore();
     storeGridItemPurchaseOrder.clearFilter();
@@ -194,14 +194,14 @@ function updateGridPurchasev3() {
     Ext.each(storeGridItemPurchaseOrder.data.items, function(obj, i) {
         var total = obj.data.qty * (obj.data.price);
         var diskon = (total / 100) * obj.data.disc;
-        var tax = total*(obj.data.rate*1/100);
+        // var tax = total*(obj.data.rate*1/100);
 
-        if(isIncludeTax){
-            //include tax
-             var total_per_row = (total - diskon);
-        } else {
-            var total_per_row = (total - diskon)+tax;
-        }
+        // if(isIncludeTax){
+        //     //include tax
+        //      var total_per_row = (total - diskon);
+        // } else {
+        //     var total_per_row = (total - diskon)+tax;
+        // }
 
        obj.set('total', total_per_row);
     });
@@ -211,7 +211,7 @@ function updateGridPurchasev3() {
         url: CLINIC_API + 'Purchase/summary_purchase_inv',
         method: 'POST',
         params: {
-            include_tax: isIncludeTax,
+            // include_tax: isIncludeTax,
             shipping_cost: angkutPurchaseOrder,
             Purchase_item: json,
             tax_id:Ext.getCmp('cb_tax_id_po').getValue()*1,
@@ -412,7 +412,7 @@ function validasiPurchaseOrder() {
 function updateGridPurchaseOrderv3() {
 
     var angkutPurchaseOrder = str_replace(",", "", Ext.getCmp('freightPurchaseOrder').getValue()) * 1;
-    var isIncludeTax = Ext.getCmp('include_tax_po').getValue() * 1;
+    // var isIncludeTax = Ext.getCmp('include_tax_po').getValue() * 1;
 
     var storeGridItemPurchaseOrder = Ext.getCmp('GridItemEntryPurchaseOrder').getStore();
     storeGridItemPurchaseOrder.clearFilter();
@@ -421,14 +421,14 @@ function updateGridPurchaseOrderv3() {
     Ext.each(storeGridItemPurchaseOrder.data.items, function(obj, i) {
         var total = obj.data.qty * (obj.data.price);
         var diskon = (total / 100) * obj.data.disc;
-        var tax = total*(obj.data.rate*1/100);
+        // var tax = total*(obj.data.rate*1/100);
 
-        if(isIncludeTax){
-            //include tax
-             var total_per_row = (total - diskon);
-        } else {
-            var total_per_row = (total - diskon)+tax;
-        }
+        // if(isIncludeTax){
+        //     //include tax
+        //      var total_per_row = (total - diskon);
+        // } else {
+        //     var total_per_row = (total - diskon)+tax;
+        // }
 
        obj.set('total', total_per_row);
     });
@@ -438,7 +438,7 @@ function updateGridPurchaseOrderv3() {
         url: CLINIC_API + 'Purchase/summary_purchase_inv',
         method: 'POST',
         params: {
-            include_tax: isIncludeTax,
+            // include_tax: isIncludeTax,
             shipping_cost: angkutPurchaseOrder,
             Purchase_item: json,
             tax_id:Ext.getCmp('cb_tax_id_po').getValue()*1,
@@ -455,7 +455,7 @@ function updateGridPurchaseOrderv3() {
             Ext.getCmp('totalPurchaseOrder_1').setValue(number_format(d.total)); //total
 
 
-            Ext.getCmp('totalPajakPurchaseOrder').setValue(number_format(Math.ceil(d.total_tax)));
+            // Ext.getCmp('totalPajakPurchaseOrder').setValue(number_format(Math.ceil(d.total_tax)));
 
             Ext.getCmp('totalPurchaseOrder').setValue(number_format(d.grand_total));
         },

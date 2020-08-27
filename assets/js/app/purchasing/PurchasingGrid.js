@@ -297,6 +297,7 @@ Ext.define(dir_sys + 'purchasing.PurchasingGrid', {
                    
                     Ext.getCmp('GridItemEntryPurchaseOrder').getStore().removeAll();
                     Ext.getCmp('freightPurchaseOrder').setValue(0);                    
+                    // Ext.getCmp('taxname').getStore().load();                    
                     
                     var start_date = new Date();
                     // var end_date  = start_date.setMonth(start_date.getMonth()+1);

@@ -20,72 +20,7 @@ var formPaymentPOS = Ext.create('Ext.form.Panel', {
     },
     items: [
         {xtype: 'hiddenfield', id: 'member_idSale', name: 'member_id'},
-        {xtype: 'displayfield', name: 'total_sales', fieldLabel:'Total Pembelian',fieldStyle: 'text-align: right;', allowBlank: false,labelCls: 'biggertext_wbg',fieldCls:'biggertext_wbg'},
-        // {
-        //     xtype      : 'fieldcontainer',
-        //     id:'payment_method',
-        //     fieldLabel : 'Metode Bayar',
-        //     defaultType: 'radiofield',
-        //     defaults: {
-        //         flex: 1,
-                
-        //     },
-        //     layout: 'hbox',
-        //     items: [
-        //         {
-        //             boxLabel  : 'Uang Tunai',
-        //             name      : 'cash',
-        //             inputValue: 1,
-        //             id        : 'cash',
-        //             style:{
-        //                 marginLeft:'91px'
-        //             },
-        //             listeners:{
-        //                 render: function(component) {
-        //                     component.getEl().on('click', function(event, el) {
-                               
-        //                        if(Ext.getCmp('cash').getValue()==true){
-
-        //                            cash_method()
-        //                         }
-        //                     });
-        //                 }
-        //             }
-
-        //         }, {
-        //             boxLabel  : 'Kredit',
-        //             name      : 'credit',
-        //             inputValue: 2,
-        //             id        : 'credit',
-        //             listeners:{
-        //                 render: function(component) {
-        //                     component.getEl().on('click', function(event, el) {
-        //                         //
-        //                         // get_plafon(Ext.getCmp('member_idSale').getValue());
-        //                         if(Ext.getCmp('credit').getValue()==true){
-                                    
-        //                             credit_method();   
-                                    
-        //                             get_loan_summary(Ext.getCmp('member_idSale').getValue());
-                                    
-        //                         }
-                                
-
-        //                     });
-        //                 }
-        //             }
-        //         },
-                
-        //     ]
-        // },
-        // {xtype: 'displayfield', name: 'sisa_plafon',id: 'sisa_plafonSales', fieldLabel:'Sisa Angsuran Plafon',fieldStyle: 'text-align: right;', allowBlank: false,labelCls: 'biggertext_wbg',fieldCls:'biggertext_wbg'},
-        // {xtype: 'comboxloanproduct', name: 'id_loan_type', labelCls: 'biggertext_wbg'},
-        // {xtype: 'numberfield', name: 'tenor', id: 'tenor', fieldLabel:'Tenor',fieldStyle: 'text-align: left:251px',allowBlank: false,labelCls: 'biggertext_wbg',fieldCls:'biggertext_wbg',width:70},
-        // Ext.panel.Panel({
-        //     // title:'Informasi',
-        //     id:'info_text',
-        //     html: '<p><center>Maaf, Anda tidak bisa mengunakan<center></p><p><center>pembayaran dengan Kredit, karena sisa plafon</center></p><center>anda tidak mencukupi</center></p>'
-        // }),
+        {xtype: 'displayfield', name: 'total_sales', fieldLabel:'Total Pembelian',fieldStyle: 'text-align: right;', allowBlank: false,labelCls: 'biggertext_wbg',fieldCls:'biggertext_wbg'},       
         {xtype: 'textfield', name: 'payment_amount',id: 'payment_amount', fieldLabel:'Pembayaran',fieldStyle: 'text-align: right;', allowBlank: false,labelCls: 'biggertext_wbg',fieldCls:'biggertext_wbg',
             listeners: {
                 'render': function(c) {

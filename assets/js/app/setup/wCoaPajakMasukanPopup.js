@@ -1,12 +1,36 @@
 //START PAJAK KELUAR
-
+Ext.define('GridCOAPajakMasukanPopupModel', {
+    extend: 'Ext.data.Model',
+    fields: ['idaccount','idunit','idaccounttype','accnumber','accname','balance','description','namaunit','acctypename'],
+    idProperty: 'id'
+});
+var storeCOAPajakMasukanPopup = Ext.create('Ext.data.Store', {
+    pageSize: 100,
+    model: 'GridCOAPajakMasukanPopupModel',
+    //remoteSort: true,
+    // autoload:true,
+    proxy: {
+        type: 'ajax',
+        url: SITE_URL + 'backend/ext_get_account/gridaccount/account',
+        actionMethods: 'POST',
+        reader: {
+            root: 'rows',
+            totalProperty: 'results'
+        },
+        //simpleSortMode: true
+    },
+    sorters: [{
+        property: 'idaccount',
+        direction: 'ASC'
+    }]
+})
 //acc list
 Ext.define('GridCOAPajakMasukanPopup', {
     itemId: 'GridCOAPajakMasukanPopup',
     id: 'GridCOAPajakMasukanPopup',
     extend: 'Ext.grid.Panel',
     alias: 'widget.GridCOAPajakMasukanPopup',
-    store: storeGridAccount,
+    store: storeCOAPajakMasukanPopup,
     loadMask: true,
     columns: [
     {
@@ -19,8 +43,8 @@ Ext.define('GridCOAPajakMasukanPopup', {
             icon: BASE_URL + 'assets/icons/fam/arrow_right.png',
             handler: function(grid, rowIndex, colIndex, actionItem, event, selectedRecord, row) {
                // setValueAcc(selectedRecord,'wCoaPajakMasukanPopup','_coa_hutang_pi');
-                 Ext.getCmp('idaccpaidSetup').setValue(selectedRecord.data.idaccount);
-               Ext.getCmp('accpaidSetup').setValue(selectedRecord.data.accname);
+               Ext.getCmp('coa_tax_purchase_id').setValue(selectedRecord.data.idaccount);
+               Ext.getCmp('acc_tax_purchase').setValue(selectedRecord.data.accname);
                Ext.getCmp('wCoaPajakMasukanPopup').hide();
             }
         },
@@ -47,7 +71,7 @@ Ext.define('GridCOAPajakMasukanPopup', {
             ]
         }, {
             xtype: 'pagingtoolbar',
-            store: storeGridAccount, // same store GridPanel is using
+            store: storeCOAPajakMasukanPopup, // same store GridPanel is using
             dock: 'bottom',
             displayInfo: true
                     // pageSize:20

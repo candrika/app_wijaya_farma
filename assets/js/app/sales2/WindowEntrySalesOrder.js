@@ -226,7 +226,7 @@ Ext.define('EntrySalesOrder', {
                    
                     {
                         xtype:'comboxtaxtype',
-                        name:'tax_id_so',
+                        name:'comboxtax',
                         labelWidth: 150,
                         id:'cb_tax_id_so',
                         listeners: {

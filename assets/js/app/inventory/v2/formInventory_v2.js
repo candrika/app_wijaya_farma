@@ -58,13 +58,6 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
                             items: [
                             { xtype: 'hiddenfield', id: 'product_id_formInventory_v2', name: 'product_id', allowBlank: false },
                             { xtype: 'textfield', name: 'product_name', fieldLabel: 'Nama Barang', allowBlank: false },
-                            // {
-                            //     xtype:'comboxBusinessTransferUnit',
-                            //     allowBlank:false,
-                            //     name:'business_id',
-                            //     id:'inventory_business_id',
-
-                            // }, 
                             { xtype: 'comboxInventoryType', fieldLabel:'Jenis', name:'inventory_class_id', allowBlank: false,
                                 listeners: {
                                     change: function (field, newValue, oldValue) {
@@ -89,6 +82,7 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
                             { xtype: 'datefield', name: 'expired_date',fieldLabel:'Tanggal Kadarluarsa',format:'d-m-Y'},
                             { xtype: 'comboxinventorycat', name: 'idinventorycat', fieldLabel: 'Kategori'},
                             { xtype: 'comboxproductlocation', name: 'product_location_id', fieldLabel: 'Lokasi'},
+                            { xtype: 'comboxvendorname', name: 'vendor_id', fieldLabel: 'Vendor'},
                             { xtype: 'comboxbrand', name: 'idbrand', fieldLabel: 'Merek' },
                             { xtype: 'textarea', name: 'product_description', fieldLabel: 'Deskripsi' },
                             { xtype: 'textfield', name: 'stock_available', fieldLabel: 'Stok',readOnly:true,fieldStyle: 'text-align: right;',
@@ -132,17 +126,6 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
                                     }
                                 }
                             },
-                            { xtype: 'textfield', name: 'cost_price', fieldLabel: 'Harga Pokok', hidden:true,
-                                fieldStyle: 'text-align: right;',
-                                listeners: {
-                                    'render': function(c) {
-                                        c.getEl().on('keyup', function() {
-                                            this.setRawValue(renderNomor(this.getValue()));
-                                            // updateSelisihSalesPayment();
-                                        }, c);
-                                    }
-                                } 
-                            },
                             { xtype: 'textfield', name: 'buy_price', fieldLabel: 'Harga Beli', allowBlank:false,
                                 fieldStyle: 'text-align: right;',
                                 listeners: {
@@ -155,6 +138,32 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
                                 } 
                             },
                             {
+                                xtype: 'hiddenfield',
+                                name: 'coa_purchase_id'
+                            },
+                            {
+                                xtype: 'textfield',
+                                name: 'coa_purchase_name',
+                                allowBlank: false,
+                                fieldLabel: 'Akun Pembelian',
+                                listeners: {
+                                    render: function(component) {
+                                        component.getEl().on('click', function(event, el) {
+                                            WindowCoaProductPurchasePopup.show();
+                                            var store = Ext.getCmp('GridWindowCoaProductPurchasePopup').getStore();
+                                            store.getProxy().extraParams = {};
+                                            store.on('beforeload', function(store, operation, eOpts) {
+                                                operation.params = {
+                                                    'idunit': idunit,
+                                                    'idaccounttype': '14,15' //beban & persediaan
+                                                };
+                                            });
+                                            store.load();
+                                        });
+                                    }
+                                }
+                            },
+                            {
                                 xtype:'comboxtaxtype',
                                 hidden:true,
                                 name:'coa_tax_purchase_id',
@@ -162,65 +171,65 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
                                 fieldLabel:'Pajak Pembelian'
                             }]
                 },
-                // {
-                //     xtype: 'fieldset',
-                //     title: 'Konsinyasi',
-                //     defaults: {
-                //         anchor: '100%'
-                //     },
-                //     items: [
-                //             { xtype: 'checkboxfield',
-                //                 fieldLabel:'Konsinyasi?',
-                //                 name: 'is_consignment',
-                //                 boxLabel: 'Ya', 
-                //                 listeners: {
-                //                     change: function() {
-                //                         if (this.getValue()) {
-                //                             ctrl_is_consign(false)
-                //                         } else {
-                //                             ctrl_is_consign(true)
-                //                         }
-                //                     }
-                //                 }
-                //             },
-                //             { xtype: 'hiddenfield', name: 'consignment_owner_id' },
-                //             { xtype: 'hiddenfield', name: 'consignment_owner_type_id' },
-                //             {
-                //                 xtype:'textfield',
-                //                 name:'owner_name',
-                //                 allowBlank:false,
-                //                 fieldLabel:'Konsinyor',
-                //                 listeners: {
-                //                     render: function(component) {
-                //                         component.getEl().on('click', function(event, el) {
-                //                             // ChooserListCustomer.target = Ext.getCmp('EntrySalesOrder');
-                //                             windowInventoryOwner.show();
-                //                             var store = Ext.getCmp('GridInventoryOwnerMember').getStore();
-                //                             store.getProxy().extraParams={};
-                //                             // store.on('beforeload', function(store, operation, eOpts) {
-                //                             //     operation.params = {
-                //                             //         'idunit': idunit,
-                //                             //         'idaccounttype': '14,15' //beban
-                //                             //     };
-                //                             // });
-                //                             store.load();    
-                //                         });
-                //                     }
-                //                 }
-                //             },                            
-                //             { xtype: 'textfield', name: 'consignment_base_price', fieldLabel: 'Harga Pokok',
-                //                 fieldStyle: 'text-align: right;',
-                //                 allowBlank:false,
-                //                 listeners: {
-                //                     'render': function(c) {
-                //                         c.getEl().on('keyup', function() {
-                //                             this.setRawValue(renderNomor(this.getValue()));
-                //                             // updateSelisihSalesPayment();
-                //                         }, c);
-                //                     }
-                //             } }
-                //     ]
-                // },
+                {
+                    xtype: 'fieldset',
+                    title: 'Konsinyasi',
+                    defaults: {
+                        anchor: '100%'
+                    },
+                    items: [
+                            { xtype: 'checkboxfield',
+                                fieldLabel:'Konsinyasi?',
+                                name: 'is_consignment',
+                                boxLabel: 'Ya', 
+                                listeners: {
+                                    change: function() {
+                                        if (this.getValue()) {
+                                            ctrl_is_consign(false)
+                                        } else {
+                                            ctrl_is_consign(true)
+                                        }
+                                    }
+                                }
+                            },
+                            { xtype: 'hiddenfield', name: 'consignment_owner_id' },
+                            { xtype: 'hiddenfield', name: 'consignment_owner_type_id' },
+                            {
+                                xtype:'textfield',
+                                name:'owner_name',
+                                allowBlank:false,
+                                fieldLabel:'Konsinyor',
+                                listeners: {
+                                    render: function(component) {
+                                        component.getEl().on('click', function(event, el) {
+                                            // ChooserListCustomer.target = Ext.getCmp('EntrySalesOrder');
+                                            windowInventoryOwner.show();
+                                            var store = Ext.getCmp('GridInventoryOwnerMember').getStore();
+                                            store.getProxy().extraParams={};
+                                            // store.on('beforeload', function(store, operation, eOpts) {
+                                            //     operation.params = {
+                                            //         'idunit': idunit,
+                                            //         'idaccounttype': '14,15' //beban
+                                            //     };
+                                            // });
+                                            store.load();    
+                                        });
+                                    }
+                                }
+                            },                            
+                            { xtype: 'textfield', name: 'consignment_base_price', fieldLabel: 'Harga Pokok',
+                                fieldStyle: 'text-align: right;',
+                                allowBlank:false,
+                                listeners: {
+                                    'render': function(c) {
+                                        c.getEl().on('keyup', function() {
+                                            this.setRawValue(renderNomor(this.getValue()));
+                                            // updateSelisihSalesPayment();
+                                        }, c);
+                                    }
+                            } }
+                    ]
+                },
                 {
                     xtype: 'fieldset',
                     title: 'Penjualan',
@@ -243,38 +252,7 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
                                     }
                                 }
                             },
-                           { xtype: 'textfield', name: 'wholesale_price', fieldLabel: 'Harga Grosir', hidden:true,
-                                    fieldStyle: 'text-align: right;',
-                                    listeners: {
-                                        'render': function(c) {
-                                            c.getEl().on('keyup', function() {
-                                                this.setRawValue(renderNomor(this.getValue()));
-                                                // updateSelisihSalesPayment();
-                                            }, c);
-                                        }
-                                    } },
-                            { xtype: 'textfield', name: 'wholesale_price_member', fieldLabel: 'Harga Grosir Anggota', hidden:true,
-                                    fieldStyle: 'text-align: right;',
-                                    listeners: {
-                                        'render': function(c) {
-                                            c.getEl().on('keyup', function() {
-                                                this.setRawValue(renderNomor(this.getValue()));
-                                                // updateSelisihSalesPayment();
-                                            }, c);
-                                        }
-                                    } },
-                            // { xtype: 'textfield', name: 'retail_price', fieldLabel: 'Harga Non Anggota', allowBlank: false,
-                            //     fieldStyle: 'text-align: right;',
-                            //     listeners: {
-                            //         'render': function(c) {
-                            //             c.getEl().on('keyup', function() {
-                            //                 this.setRawValue(renderNomor(this.getValue()));
-                            //                 // updateSelisihSalesPayment();
-                            //             }, c);
-                            //         }
-                            //     } 
-                            // },
-                            { xtype: 'textfield', name: 'retail_price_member', fieldLabel: 'Harga Jual', allowBlank: false,
+                            { xtype: 'textfield', name: 'retail_price', fieldLabel: 'Harga Jual', allowBlank: false,
                                 fieldStyle: 'text-align: right;',
                                 listeners: {
                                     'render': function(c) {
@@ -284,6 +262,32 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
                                         }, c);
                                     }
                                 } 
+                            },
+                            {
+                                xtype: 'hiddenfield',
+                                name: 'coa_sales_id'
+                            },
+                            {
+                                xtype: 'textfield',
+                                name: 'coa_sales_name',
+                                allowBlank: false,
+                                fieldLabel: 'Akun Penjualan',
+                                listeners: {
+                                    render: function(component) {
+                                        component.getEl().on('click', function(event, el) {
+                                            WindowCoaProductSalesPopup.show();
+                                            var store = Ext.getCmp('GridWindowCoaProductSalesPopup').getStore();
+                                            store.getProxy().extraParams = {};
+                                            store.on('beforeload', function(store, operation, eOpts) {
+                                                operation.params = {
+                                                    'idunit': idunit,
+                                                    'idaccounttype': '12,16' //pendapatan
+                                                };
+                                            });
+                                            store.load();
+                                        });
+                                    }
+                                }
                             },
                             {
                                 xtype:'comboxtaxtype',
@@ -358,48 +362,27 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
 function ctrl_product(){
     var form = Ext.getCmp('formInventory_v2').getForm();
     form.findField('no_sku').show();
-    // form.findField('no_barcode').show();
-    // form.findField('product_unit_id').setDisabled(false);
-    // form.findField('product_unit_id').show();
     form.findField('no_barcode').show();
     form.findField('idinventorycat').show();
     form.findField('idbrand').show();
     form.findField('buy_price').show();
     form.findField('stock_available').show();
 
-    // form.findField('is_purchasable').setDisabled(false);
-    // form.findField('is_purchasable').setValue(false);
-    // form.findField('wholesale_price').show();
-    // form.findField('wholesale_price_member').show();
-
-    // form.findField('coa_inventory_name').show();
-    // Ext.getCmp('fieldsetakunpersediaan').show();
-    // Ext.getCmp('coa_inventory_name').allowBlank = false;
-    // console.log(Ext.getCmp('coa_inventory_name').allowBlank);
     form.findField('product_location_id').show();
+    form.findField('vendor_id').show();
 
 }
 
 function ctrl_service(){
     var form = Ext.getCmp('formInventory_v2').getForm();
     form.findField('no_sku').hide();
-    // form.findField('no_barcode').hide();
-    // form.findField('product_unit_id').setDisabled(true);
-    // form.findField('product_unit_id').hide();
     form.findField('no_barcode').hide();
     form.findField('idinventorycat').hide();
     form.findField('idbrand').hide();
     form.findField('buy_price').hide();
     form.findField('stock_available').hide();
+    form.findField('vendor_id').show();
     
-    // Ext.getCmp('coa_inventory_name').allowBlank = true;
-    // console.log(Ext.getCmp('coa_inventory_name').allowBlank);
-    // Ext.getCmp('coa_inventory_name').validate();
-    // Ext.getCmp('coa_inventory_name').hide();
-    Ext.getCmp('fieldsetakunpersediaan').hide();
-
-    // form.findField('is_purchasable').setDisabled(true);
-    // form.findField('is_purchasable').setValue(false);
     form.findField('product_location_id').hide();
-    // form.findField('wholesale_price_member').hide();
+    
 }

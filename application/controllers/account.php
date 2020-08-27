@@ -451,7 +451,7 @@ class account extends MY_Controller {
     }
 
     function createMenu($PARENT, $active) {
-
+        // echo $PARENT;
         $sql = "select a.idpos,d.namepos,a.lock,a.display,a.idclassificationcf,a.idaccounttype,a.idparent,a.idaccount,a.accname,a.accnumber,a.balance,a.description,b.classname,c.acctypename,b.prefixno,active
                 from account a
                 left join accounttype c ON a.idaccounttype = c.idaccounttype 
@@ -468,79 +468,82 @@ class account extends MY_Controller {
             //kalo windo popup akunnnya dicari berdasarkan idaccounttype
             $sql.="WHERE a.display is null";
         } else {
+            // echo "string";
             $sql.="WHERE a.idparent=$PARENT AND a.display is null";
+            // echo $sql;
         }
 
         if ($active != null) {
+            // echo "string";
             $sql.=" AND a.active='t'";
         }
 
-        //kalo bukan superuser pake idunit
-        if ($this->session->userdata('group_id') != 99 && $this->session->userdata('group_id') != 1) {
-            $sql.=" AND a.idunit='" . $this->session->userdata('idunit') . "'";
-        }
+//         //kalo bukan superuser pake idunit
+//         if ($this->session->userdata('group_id') != 99 && $this->session->userdata('group_id') != 1) {
+//             $sql.=" AND a.idunit='" . $this->session->userdata('idunit') . "'";
+//         }
 
-        if ($this->input->get('extraparams') != '') {
-            $xtraparam = explode(":", $this->input->get('extraparams'));
-            if ($xtraparam[1] != 'null') {
-                $sql.=" AND $xtraparam[0]='" . $xtraparam[1] . "'";
-            }
-        }
+//         if ($this->input->get('extraparams') != '') {
+//             $xtraparam = explode(":", $this->input->get('extraparams'));
+//             if ($xtraparam[1] != 'null') {
+//                 $sql.=" AND $xtraparam[0]='" . $xtraparam[1] . "'";
+//             }
+//         }
 
-        if ($this->input->get('idunit') != '') {
-            //rekues dari input pembelian
-            $sql.=" AND a.idunit='" . $this->input->get('idunit') . "'";
-        }
+//         if ($this->input->get('idunit') != '') {
+//             //rekues dari input pembelian
+//             $sql.=" AND a.idunit='" . $this->input->get('idunit') . "'";
+//         }
 
-        if ($this->input->get('namaunit') != '') {
-            $qunit = $this->db->get_where('unit',array('namaunit'=>$this->input->get('namaunit')))->row();
-            $sql.=" AND a.idunit='" . $qunit->idunit . "'";
-        }
+//         if ($this->input->get('namaunit') != '') {
+//             $qunit = $this->db->get_where('unit',array('namaunit'=>$this->input->get('namaunit')))->row();
+//             $sql.=" AND a.idunit='" . $qunit->idunit . "'";
+//         }
 
-        if($this->input->get('idaccounttype')!='' && $PARENT!=0)
-        {
-            $sql.=" AND (";
-            $idacctype = explode(",",$this->input->get('idaccounttype'));
-//            echo count($idacctype);
-            $i=1;
-            foreach ($idacctype as $value) {
-                $sql.=" a.idaccounttype=$value";
-                if($i!=count($idacctype))
-                {
-                    $sql.=" OR";
-                }
-                $i++;
-            }
-            $sql.=")";
+//         if($this->input->get('idaccounttype')!='' && $PARENT!=0)
+//         {
+//             $sql.=" AND (";
+//             $idacctype = explode(",",$this->input->get('idaccounttype'));
+// //            echo count($idacctype);
+//             $i=1;
+//             foreach ($idacctype as $value) {
+//                 $sql.=" a.idaccounttype=$value";
+//                 if($i!=count($idacctype))
+//                 {
+//                     $sql.=" OR";
+//                 }
+//                 $i++;
+//             }
+//             $sql.=")";
 
-            // $sql.=" AND a.idpos=2";
-        }
+//             // $sql.=" AND a.idpos=2";
+//         }
 
-        if($this->input->get('notshowacctype')!='' && $PARENT!=0)
-        {
-            $sql.=" AND (";
-            $idacctype = explode(",",$this->input->get('notshowacctype'));
-//            echo count($idacctype);
-            $i=1;
-            foreach ($idacctype as $value) {
-                $sql.=" a.idaccounttype!=$value";
-                if($i!=count($idacctype))
-                {
-                    $sql.=" OR";
-                }
-                $i++;
-            }
-            $sql.=")";
+//         if($this->input->get('notshowacctype')!='' && $PARENT!=0)
+//         {
+//             $sql.=" AND (";
+//             $idacctype = explode(",",$this->input->get('notshowacctype'));
+// //            echo count($idacctype);
+//             $i=1;
+//             foreach ($idacctype as $value) {
+//                 $sql.=" a.idaccounttype!=$value";
+//                 if($i!=count($idacctype))
+//                 {
+//                     $sql.=" OR";
+//                 }
+//                 $i++;
+//             }
+//             $sql.=")";
 
-            // $sql.=" AND a.idpos=2";
-        // echo $sql;
-        // exit;
-        }
+//             // $sql.=" AND a.idpos=2";
+//         // echo $sql;
+//         // exit;
+//         }
 
-        // $sql.=" AND a.idunit!=99";
-        if (strpos($sql,'a.idunit') === false) {
-            exit;
-        }
+//         // $sql.=" AND a.idunit!=99";
+//         if (strpos($sql,'a.idunit') === false) {
+//             exit;
+//         }
 
         $sql.=" ORDER BY a.idaccount";
         // echo $sql;

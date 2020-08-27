@@ -748,16 +748,16 @@ class Backend extends MY_Controller {
                     //     var_dump($obj);
                     // }           
                 //cek apakah parent udah di delete
-                $qcek = $this->db->query("select display 
-                    from account where 
-                    idaccount = ".$obj->idparent." ")->row();
-                if($qcek->display==1){
-                    // if($obj->idparent==756){
-                    //     echo $this->db->last_query(); die;
-                    // }
+                // $qcek = $this->db->query("select display 
+                //     from account where 
+                //     idaccount = ".$obj->idparent." ")->row();
+                // if($qcek->display==1){
+                //     // if($obj->idparent==756){
+                //     //     echo $this->db->last_query(); die;
+                //     // }
                     
-                    $skip = true;
-                }
+                //     $skip = true;
+                // }
             }
 
             if(!$skip) { 
@@ -1499,7 +1499,9 @@ class Backend extends MY_Controller {
             $field = array('polytpe_id', 'polytpe_name');
         } else if ($data == 'staff_type') {
             $field = array('staff_type_id', 'staff_type_name');
-        } 
+        } else if ($data == 'product_vendor') {
+            $field = array('vendor_id', 'vendor_name');
+        }  
 
         if($orderby)
         {

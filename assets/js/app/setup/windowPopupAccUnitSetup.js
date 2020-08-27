@@ -1,9 +1,35 @@
+Ext.define('GridAccReceiveModel', {
+    extend: 'Ext.data.Model',
+    fields: ['idaccount','idunit','idaccounttype','accnumber','accname','balance','description','namaunit','acctypename'],
+    idProperty: 'id'
+});
+var storeGridAccReceive = Ext.create('Ext.data.Store', {
+    pageSize: 100,
+    model: 'GridAccReceiveModel',
+    //remoteSort: true,
+    // autoload:true,
+    proxy: {
+        type: 'ajax',
+        url: SITE_URL + 'backend/ext_get_account/gridaccount/account',
+        actionMethods: 'POST',
+        reader: {
+            root: 'rows',
+            totalProperty: 'results'
+        },
+        //simpleSortMode: true
+    },
+    sorters: [{
+        property: 'idaccount',
+        direction: 'ASC'
+    }]
+})
+
 Ext.define('GridAccReceive', {
     itemId: 'GridAccReceive',
     id: 'GridAccReceive',
     extend: 'Ext.grid.Panel',
     alias: 'widget.GridAccReceive',
-    store: storeGridAccount,
+    store: storeGridAccReceive,
     loadMask: true,
     columns: [
     {
@@ -46,7 +72,7 @@ Ext.define('GridAccReceive', {
             ]
         }, {
             xtype: 'pagingtoolbar',
-            store: storeGridAccount, // same store GridPanel is using
+            store: storeGridAccReceive, // same store GridPanel is using
             dock: 'bottom',
             displayInfo: true
                     // pageSize:20

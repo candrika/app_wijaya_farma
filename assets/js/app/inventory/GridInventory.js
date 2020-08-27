@@ -9,7 +9,7 @@ if(!Ext.isDefined(Ext.getCmp('windowPopupImportProduct'))){
 
 Ext.define('GridInventoryModel', {
   extend: 'Ext.data.Model',
-  fields: ['product_id','product_name','product_no','product_description','cost_price','buy_price','wholesale_price','retail_price','weight','product_image','stock_available','stock_commited','stock_incoming','stock_max_online','status','available_on_pos','only_for_member','no_sku','no_barcode','no_supplier','is_purchasable','is_sellable','namecat','namesupplier','brand_name','idinventorycat','inventory_class_id','retail_price_member','inventory_class_name','business_name','product_balance','location_name'],
+  fields: ['product_id','product_name','product_no','product_description','cost_price','buy_price','wholesale_price','retail_price','weight','product_image','stock_available','stock_commited','stock_incoming','stock_max_online','status','available_on_pos','only_for_member','no_sku','no_barcode','no_supplier','is_purchasable','is_sellable','namecat','namesupplier','brand_name','idinventorycat','inventory_class_id','retail_price_member','inventory_class_name','business_name','product_balance','location_name','vendor_name','vendor_id'],
   idProperty: 'id'
 });
 
@@ -103,28 +103,21 @@ Ext.define(dir_sys + 'inventory.GridInventory', {
       dataIndex: 'product_no',
       minWidth: 150
     },
-    // {header: 'Unit', dataIndex: 'namaunit', minWidth: 100},
     {
       header: 'Nama Persediaan',
       dataIndex: 'product_name',
       minWidth: 250,
       flex: 1
+    },{
+      header:'Nama Vendor',
+      dataIndex:'vendor_name',
+      minWidth:250
     },
-    // {
-    //   header: 'Unit Usaha',
-    //   dataIndex: 'business_name',
-    //   minWidth: 150
-    // },
     {
       header: 'Lokasi',
       dataIndex: 'location_name',
       minWidth: 150
     },    
-    // {
-    //   header: 'Jenis',
-    //   dataIndex: 'inventory_class_name',
-    //   minWidth: 110
-    // },
     {
       header: 'Stok',
       dataIndex: 'stock_available',

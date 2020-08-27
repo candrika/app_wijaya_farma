@@ -45,8 +45,6 @@ storeStockOpnameItemPopup.on('beforeload', function(store, operation, eOpts) {
   operation.params = {
     'idunit':idunit,
     'key':key,
-    'password':password,
-    // 'deleted':0,
     'stock_opname_id':Ext.getCmp('stock_opname_id').getValue()
   };
 });

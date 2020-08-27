@@ -16,7 +16,7 @@ class m_gridaccount extends CI_Model {
     }
 
     function selectField() {
-        return "a.idaccount,a.idunit,a.idaccounttype,a.accnumber,a.accname,a.balance,a.description,b.namaunit,c.acctypename,a.idparent";
+        return "a.idaccount,a.idunit,a.idaccounttype,a.accnumber,a.accname,a.balance,a.description,b.namaunit,c.acctypename,a.idparent,a.deleted";
     }
     
     function fieldCek()
@@ -38,7 +38,7 @@ class m_gridaccount extends CI_Model {
     }
 
     function whereQuery() {
-        return " a.idpos=2 and a.active=true and a.display is null";
+        return " a.idpos=2 and a.active=true and a.deleted =0";
     }
 
     function orderBy() {

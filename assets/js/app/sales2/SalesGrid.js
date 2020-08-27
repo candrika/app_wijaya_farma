@@ -383,69 +383,70 @@ Ext.define(dir_sys + 'sales2.SalesGrid', {
                 //      Ext.getCmp('search_pos').focus();
                 // }
             },
-            {
-                text: 'Buat Invoice',
-                iconCls: 'add-icon',
-                handler: function() {
-                    WindowEntrySalesOrder.show();
+            // {
+            //     text: 'Buat Invoice',
+            //     iconCls: 'add-icon',
+            //     handler: function() {
+            //         WindowEntrySalesOrder.show();
 
-                    var form = Ext.getCmp('EntrySalesOrder').getForm();
-                    form.reset();
-                    // form.findField('business_id').getStore().load();
-                    form.findField('status').setValue(3);
-                    form.findField('status').setReadOnly(true);
-                    form.findField('order_status').hide();
-                    //order_status
-                    Ext.getCmp('freightSalesOrder').setValue(0);
+            //         var form = Ext.getCmp('EntrySalesOrder').getForm();
+            //         form.reset();
+            //         // form.findField('business_id').getStore().load();
+            //         form.findField('status').setValue(3);
+            //         form.findField('status').setReadOnly(true);
+            //         form.findField('order_status').hide();
+            //         //order_status
+            //         Ext.getCmp('freightSalesOrder').setValue(0);
 
-                    var start_date = new Date();
-                    var end_date = new Date().addDays(7);
-                    // var end_date  = start_date.setMonth(start_date.getMonth()+1);
-                    console.log(start_date+' '+end_date)
-                    Ext.getCmp('salesdate_so').setValue(start_date);
-                    Ext.getCmp('duedate_so').setValue(end_date);
+            //         var start_date = new Date();
+            //         var end_date = new Date().addDays(7);
+            //         // var end_date  = start_date.setMonth(start_date.getMonth()+1);
+            //         console.log(start_date+' '+end_date)
+            //         Ext.getCmp('salesdate_so').setValue(start_date);
+            //         Ext.getCmp('duedate_so').setValue(end_date);
 
-                    Ext.getCmp('btnRecordSalesOrder').setDisabled(false);
+            //         Ext.getCmp('btnRecordSalesOrder').setDisabled(false);
 
-                    Ext.getCmp('comboxpaymentSalesOrder').getStore().load();
-                    Ext.getCmp('comboxpaymentSalesOrder').setValue('5');
+            //         Ext.getCmp('comboxpaymentSalesOrder').getStore().load();
+            //         Ext.getCmp('comboxpaymentSalesOrder').setValue('5');
 
-                    //generate number
-                    Ext.Ajax.request({
-                        url: CLINIC_API + 'sales/generate_no_invoice',
-                        method: 'GET',
-                        params: {
-                            key: key,
-                            password:password,
-                            idunit:idunit
-                        },
-                        success: function(formx, action) {
-                            var d = Ext.decode(formx.responseText);
-                            form.findField('noinvoice_sales').setValue(d.doc_number);
-                        },
-                        failure: function(formx, action) {
-                            Ext.Msg.alert('Failed', action.result ? action.result.message : 'No response');
-                        }
-                    });
+            //         //generate number
+            //         Ext.Ajax.request({
+            //             url: CLINIC_API + 'sales/generate_no_invoice',
+            //             method: 'GET',
+            //             params: {
+            //                 key: key,
+            //                 password:password,
+            //                 idunit:idunit
+            //             },
+            //             success: function(formx, action) {
+            //                 var d = Ext.decode(formx.responseText);
+            //                 form.findField('noinvoice_sales').setValue(d.doc_number);
+            //             },
+            //             failure: function(formx, action) {
+            //                 Ext.Msg.alert('Failed', action.result ? action.result.message : 'No response');
+            //             }
+            //         });
 
-                    Ext.getCmp('GridItemEntrySalesOrder').getStore().removeAll();
-                }
-            },
-            {
-                text: 'Pembayaran',
-                iconCls: 'add-icon',
-                handler: function() {
-                     windowSalesMultiPayment();
+            //         Ext.getCmp('GridItemEntrySalesOrder').getStore().removeAll();
+            //     }
+            // },
+            // {
+            //     text: 'Pembayaran',
+            //     iconCls: 'add-icon',
+            //     handler: function() {
+            //          windowSalesMultiPayment();
                     
-                     Ext.getCmp('namereceivemoney_SalesMultiPayment').hide();
-                     Ext.getCmp('amount_multireceivemoney').hide();
+            //          Ext.getCmp('namereceivemoney_SalesMultiPayment').hide();
+            //          Ext.getCmp('amount_multireceivemoney').hide();
 
-                     Ext.getCmp('GridItemEntrySalesMultiInvoice').getStore().removeAll();
-                     Ext.getCmp('form_SalesMultiPayment').getForm().reset();
+            //          Ext.getCmp('GridItemEntrySalesMultiInvoice').getStore().removeAll();
+            //          Ext.getCmp('form_SalesMultiPayment').getForm().reset();
 
-                     Ext.getCmp('date_payment_sales').setValue(new Date());  
-                }
-            }, {
+            //          Ext.getCmp('date_payment_sales').setValue(new Date());  
+            //     }
+            // }, 
+            {
                 text: 'Cetak',
                 // hidden:true,
                 iconCls: 'print-icon',
@@ -527,7 +528,7 @@ Ext.define(dir_sys + 'sales2.SalesGrid', {
                                             storeSalesGrid.load();
                                         }
 
-                                        setHeaderSalesSummary();
+                                        // setHeaderSalesSummary();
                                     },
                                     failure: function(form, action) {
                                         Ext.Msg.alert('Failed', action.result ? action.result.message : 'No response');

@@ -1,12 +1,36 @@
 //START PAJAK KELUAR
-
+Ext.define('GridCOAPajakKeluaranPopupModel', {
+    extend: 'Ext.data.Model',
+    fields: ['idaccount','idunit','idaccounttype','accnumber','accname','balance','description','namaunit','acctypename'],
+    idProperty: 'id'
+});
+var storeCOAPajakKeluaranPopup = Ext.create('Ext.data.Store', {
+    pageSize: 100,
+    model: 'GridCOAPajakKeluaranPopupModel',
+    //remoteSort: true,
+    // autoload:true,
+    proxy: {
+        type: 'ajax',
+        url: SITE_URL + 'backend/ext_get_account/gridaccount/account',
+        actionMethods: 'POST',
+        reader: {
+            root: 'rows',
+            totalProperty: 'results'
+        },
+        //simpleSortMode: true
+    },
+    sorters: [{
+        property: 'idaccount',
+        direction: 'ASC'
+    }]
+})
 //acc list
 Ext.define('GridCOAPajakKeluaranPopup', {
     itemId: 'GridCOAPajakKeluaranPopup',
     id: 'GridCOAPajakKeluaranPopup',
     extend: 'Ext.grid.Panel',
     alias: 'widget.GridCOAPajakKeluaranPopup',
-    store: storeGridAccount,
+    store: storeCOAPajakKeluaranPopup,
     loadMask: true,
     columns: [
     {
@@ -19,8 +43,8 @@ Ext.define('GridCOAPajakKeluaranPopup', {
             icon: BASE_URL + 'assets/icons/fam/arrow_right.png',
             handler: function(grid, rowIndex, colIndex, actionItem, event, selectedRecord, row) {
                // setValueAcc(selectedRecord,'wCoaPajakKeluaranPopup','_coa_hutang_pi');
-               Ext.getCmp('idacccollectedSetup').setValue(selectedRecord.data.idaccount);
-               Ext.getCmp('acccollectedSetup').setValue(selectedRecord.data.accname);
+               Ext.getCmp('coa_tax_sales_id').setValue(selectedRecord.data.idaccount);
+               Ext.getCmp('acc_tax_sales').setValue(selectedRecord.data.accname);
                Ext.getCmp('wCoaPajakKeluaranPopup').hide();
             }
         },
@@ -47,7 +71,7 @@ Ext.define('GridCOAPajakKeluaranPopup', {
             ]
         }, {
             xtype: 'pagingtoolbar',
-            store: storeGridAccount, // same store GridPanel is using
+            store: storeCOAPajakKeluaranPopup, // same store GridPanel is using
             dock: 'bottom',
             displayInfo: true
                     // pageSize:20

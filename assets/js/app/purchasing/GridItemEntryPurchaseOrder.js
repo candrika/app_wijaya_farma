@@ -306,26 +306,9 @@ Ext.define(dir_sys + 'purchasing.GridItemEntryPurchaseOrder', {
         //        });
     },
     onAddClick: function() {
-        //        console.log(Ext.getCmp('customerPurchasesOrder').getValue())
-        //        Ext.getCmp('idaccount').setValue('sad');
-        //        // Create a model instance
-        //        Ext.getCmp('formAddRowJurnal').getForm().reset();
         wItemPurchasePopupOrderPopup.show();
-        // storeGridItemPurchasesPopupOrder.load();
         Ext.getCmp('GridItemPurchasePopupOrderID').getStore().load();
-        //        var rec = new JournalStore({
-        //            idaccount: null,
-        //            accname: null,
-        //            accnumber: null,
-        //            debit: null,
-        //            credit: null
-        //        });
-        //
-        //        this.getStore().insert(0, rec);
-        //        this.cellEditing.startEditByPosition({
-        //            row: 0,
-        //            column: 0
-        //        });
+        
     },
     onRemoveClick: function(grid, rowIndex) {
         // this.getStore().getRange()[rowIndex].data['deleted'] = 1;

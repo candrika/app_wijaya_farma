@@ -1,5 +1,3 @@
-
-
 Ext.define('GridItemPurchasePopupOrderModel', {
     extend: 'Ext.data.Model',
     fields: ['product_id','product_name','product_no','product_description','cost_price','buy_price','retail_price_member','retail_price','stock_available','stock_commited','stock_incoming','stock_max_online','status','available_on_pos','only_for_member','no_sku','no_barcode','no_supplier','is_purchasable','is_sellable','product_type_name','namesupplier','brand_name'],
@@ -201,53 +199,17 @@ Ext.define(dir_sys + 'purchasing.GridItemPurchasePopupOrder', {
     ],
     listeners: {
         refresh : function (dataview) {
-            // console.log(dataview);
-            // Ext.each(dataview.panel.columns, function (column) {
-            //  if (column.autoSizeColumn === true)
-            //   column.autoSize();
-            //   console.log(column);
-            // });
+            
         },
         render: {
             scope: this,
             fn: function(grid) {
-                // var grd = Ext.getCmp('GridItemSalesPopupOrderID');
-                // grd.getView().autoSizeColumn(grd.columns[0]);
-                // grid.columns[0].autoSize();
-                // grid.autoSizeColumn(grid.columns[1]);
-                // grid.getView().autoSizeColumn(2);
-                // console.log(grid);
-                // Ext.each(grid.columns, function (column) {
-                // //     // console.log(column);
-                //     if (column.autoSizeColumn === true)
-                //     //  column.autoSize();
-                //     dataview.panel.columns[0].autoSize();
-                //      console.log(column);
-                //    });
+                
             }
         },
         itemdblclick: function(dv, record, item, index, e) {
 
-            // var formAgama = Ext.create('formAgama');
-            //            var formItemSalesPopupOrder = Ext.getCmp('formItemSalesPopupOrder');
-            //            wItemSalesPopupOrder.show();
-            //
-            //            formItemSalesPopupOrder.getForm().load({
-            //                url: SITE_URL + 'backend/loadFormData/ItemSalesPopupOrder/1/setup',
-            //                params: {
-            //                    extraparams: 'a.idtax:' + record.data.idtax
-            //                },
-            //                success: function(form, action) {
-            //                    // Ext.Msg.alert("Load failed", action.result.errorMessage);
-            //                },
-            //                failure: function(form, action) {
-            //                    Ext.Msg.alert("Load failed", action.result.errorMessage);
-            //                }
-            //            })
-            //
-            ////            
-            ////            Ext.getCmp('kddaerahS').setReadOnly(true);
-            //            Ext.getCmp('statusformItemSalesPopupOrder').setValue('edit');
+           
         }
     }
 });
@@ -255,7 +217,6 @@ Ext.define(dir_sys + 'purchasing.GridItemPurchasePopupOrder', {
 Ext.define(dir_sys + 'purchasing.wItemPurchasePopupOrderPopup',{
     extend: 'Ext.window.Window',
     alias: 'widget.wItemPurchasePopupOrderPopup',
-// var wItemPurchasePopupOrderPopup = Ext.create('widget.window', {
     id: 'wItemPurchasePopupOrderPopup',
     title: 'Choose Item',
     // header: {
@@ -265,7 +226,7 @@ Ext.define(dir_sys + 'purchasing.wItemPurchasePopupOrderPopup',{
     closable: true,
     closeAction: 'hide',
     autoWidth: true,
-    // width: panelW-100,
+    width: panelW-100,
     modal: true,
     height: 450,
     layout: 'fit',

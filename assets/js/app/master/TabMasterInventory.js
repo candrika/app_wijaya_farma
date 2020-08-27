@@ -9,6 +9,7 @@ Ext.create(dir_sys + 'master.GridInventoryCat');
 // Ext.create(dir_sys + 'master.TabSupplier');
 Ext.create(dir_sys + 'master.GridMasterProductUnit');
 Ext.create(dir_sys + 'master.GridMasterLocation');
+Ext.create(dir_sys + 'master.GridMasterVendor');
 
 Ext.define(dir_sys + 'master.TabMasterInventory', {
     extend: 'Ext.tab.Panel',
@@ -28,9 +29,9 @@ Ext.define(dir_sys + 'master.TabMasterInventory', {
         {
             xtype: 'GridMasterBrand'
         },
-        // {
-        //     xtype:'GridMasterThickness'
-        // },
+        {
+            xtype:'GridMasterVendor'
+        },
         // {
         //     xtype:'GridMasterProductType'
         // },

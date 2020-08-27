@@ -214,6 +214,7 @@ function showWindowProduct(data,idunit) {
     // formInventory_load.findField('coa_tax_purchase_id').getStore().load();
     // formInventory_load.findField('coa_tax_sales_id').getStore().load();
     formInventory_load.findField('product_location_id').getStore().load();
+    formInventory_load.findField('vendor_id').getStore().load();
     formInventory_load.findField('status').getStore().load();
 
     formInventory_load.load({
@@ -230,8 +231,9 @@ function showWindowProduct(data,idunit) {
             var d = action.result.data;
             console.log(d)
             formInventory_load.findField('buy_price').setValue(renderNomor3(d.buy_price,0,',','.'));
-            formInventory_load.findField('retail_price_member').setValue(renderNomor3(d.retail_price));
+            formInventory_load.findField('retail_price').setValue(renderNomor3(d.retail_price));
             formInventory_load.findField('product_location_id').setValue(d.location_id);
+            formInventory_load.findField('vendor_id').setValue(d.vendor_id);
 
             formInventory_load.findField('status').setValue(d.status*1);
             formInventory_load.findField('expired_date').setValue(d.expired_date);
@@ -248,16 +250,16 @@ function showWindowProduct(data,idunit) {
                  formInventory_load.findField('is_sellable').setValue(false);      
             }
 
-            //  if(d.is_consignment=='2'){
-            //     formInventory_load.findField('is_consignment').setValue(true);       
-            //     ctrl_is_consign(false)                  
-            // } else {
-            //      formInventory_load.findField('is_consignment').setValue(false);     
-            //      ctrl_is_consign(true) 
-            // }
-            // formInventory_load.findField('coa_inventory_id').setValue(d.coa_inventory_id*1);
-            //coa_inventory_name
-            // formInventory_load.findField('coa_inventory_name').setValue(d.coa_inventory_name);
+             if(d.is_consignment=='2'){
+                formInventory_load.findField('is_consignment').setValue(true);       
+                ctrl_is_consign(false)                  
+            } else {
+                 formInventory_load.findField('is_consignment').setValue(false);     
+                 ctrl_is_consign(true) 
+            }
+            formInventory_load.findField('coa_inventory_id').setValue(d.coa_inventory_id*1);
+            coa_inventory_name
+            formInventory_load.findField('coa_inventory_name').setValue(d.coa_inventory_name);
 
         },
         failure: function(form, action) {
@@ -303,19 +305,19 @@ function ctrl_is_purchase(opt){
 
 function ctrl_is_sell(opt){
     var form = Ext.getCmp('formInventory_v2').getForm();
-    // form.findField('retail_price').setDisabled(opt);
-    form.findField('retail_price_member').setDisabled(opt);
+    form.findField('retail_price').setDisabled(opt);
+    // form.findField('retail_price_member').setDisabled(opt);
     // form.findField('coa_sales_name').setDisabled(opt);
     // form.findField('coa_tax_sales_id').setDisabled(opt);
 }
 
-// function ctrl_is_consign(opt){
-//     var form = Ext.getCmp('formInventory_v2').getForm();
-//     form.findField('consignment_owner_id').setDisabled(opt);
-//     form.findField('owner_name').setDisabled(opt);
-//     form.findField('consignment_base_price').setDisabled(opt);
+function ctrl_is_consign(opt){
+    var form = Ext.getCmp('formInventory_v2').getForm();
+    form.findField('consignment_owner_id').setDisabled(opt);
+    form.findField('owner_name').setDisabled(opt);
+    form.findField('consignment_base_price').setDisabled(opt);
     
-// }
+}
 
 function Notrans_stock(){
 

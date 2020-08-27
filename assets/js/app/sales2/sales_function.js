@@ -139,8 +139,6 @@ function submit_pos_data(){
                     Ext.Msg.alert('Informasi', d.message);
                    
                     clear_form_pos();
-                    setHeaderSalesSummary();
-                    Ext.getCmp('payment_method').disable();
                     Ext.getCmp('btnPaymentPOS').setDisabled(true);
 
                     window.open(SITE_URL + 'sales/print_sales/' + d.id + '/print', '_blank');

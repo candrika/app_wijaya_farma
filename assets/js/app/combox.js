@@ -810,22 +810,7 @@ Ext.define('comboxAccountType', {
 //     autoLoad: false
 // });
 
-// Ext.define('comboxtaxtype', {
-//     extend: 'Ext.form.ComboBox',
-//     alias: 'widget.comboxtaxtype',
-//     fieldLabel: 'Pajak',
-//     displayField: 'nametax',
-//     valueField: 'idtax',
-//     name: 'idtax',
-//     editable: false,
-//     triggerAction: 'all',
-//     listConfig: {
-//         getInnerTpl: function() {
-//             return '{nametax}  ({tax_rate}%)';
-//         }
-//     },
-//     store: taxStore
-// });
+
 var inventoryCategoryStore = Ext.create('Ext.data.Store', {
     fields: ['idinventorycat', 'namecat'],
     proxy: {
@@ -1355,6 +1340,33 @@ Ext.define('comboxpayrolltype', {
     valueField: 'payname',
     store: payrolltypeStore
 });
+
+var taxStore = Ext.create('Ext.data.Store', {
+    fields: ['idtax', 'nametax'],
+    proxy: {
+        type: 'ajax',
+        url: SITE_URL + 'backend/combox/tax',
+        reader: {
+            type: 'json',
+            root: 'dat'
+        }
+    },
+    autoLoad: false
+});
+Ext.define('comboxtax', {
+    extend: 'Ext.form.field.ComboBox',
+    alias: 'widget.comboxtax',
+    displayField: 'taxname',
+    // id:'cb_tax_id_po',
+    fieldLabel: 'Jenis Pajak',
+    queryMode: 'local',
+    name: 'idtax',
+    editable: false,
+    triggerAction: 'all',
+    valueField: 'idtax',
+    store: taxStore
+});
+
 var tambahangajitypeStore = Ext.create('Ext.data.Store', {
     fields: ['idtambahangajitype', 'tambahantype'],
     proxy: {
@@ -2891,6 +2903,26 @@ Ext.define('comboxdayname', {
     store: daynameStore
 });
 
+var arrTaxtypeName=[
+    [1,'PPN'],
+    [2,'PPH22/23']
+];
+
+Ext.define('comboxtaxtype', {
+    extend: 'Ext.form.ComboBox',
+    alias: 'widget.comboxtaxtype',
+    fieldLabel: 'Jenis Pajak',
+    displayField: 'text',
+    valueField: 'value',
+    name: 'is_tax',
+    editable: false,
+    triggerAction: 'all',
+    store: new Ext.data.ArrayStore({
+        fields: ['value', 'text'],
+        data: arrTaxtypeName,
+    })
+});
+
 // 
 // COMMENT ON COLUMN "public"."medical_record"."medical_status" IS 1. Valid 2 Invalid 3. Canceled';
 // var ArrmedicalStatus=[
@@ -3024,3 +3056,28 @@ Ext.define('comboxdayname', {
 //         data: ArrmedicalPayment,
 //     })
 // });
+
+var vendorname = Ext.create('Ext.data.Store', {
+    fields: ['vendor_id', 'vendor_name'],
+    proxy: {
+        type: 'ajax',
+        url: SITE_URL + 'backend/combox/product_vendor',
+        reader: {
+            type: 'json',
+            root: 'dat'
+        }
+    },
+    autoLoad: false
+});
+
+Ext.define('comboxvendorname', {
+    extend: 'Ext.form.ComboBox',
+    alias: 'widget.comboxvendorname',
+    fieldLabel: 'Vendor',
+    displayField: 'vendor_name',
+    valueField: 'vendor_id',
+    name: 'vendor_id',
+    editable: false,
+    triggerAction: 'all',
+    store: vendorname
+});

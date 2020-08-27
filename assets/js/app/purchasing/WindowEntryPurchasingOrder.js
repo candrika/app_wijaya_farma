@@ -182,29 +182,31 @@ Ext.define('EntryPurchaseOrder', {
         },
         
         {
-            xtype: 'GridItemEntryPurchaseOrder'
+            xtype: 'GridItemEntryPurchaseOrder',
+            fieldStyle:'margin-bottom:10px'
         },
         {
             xtype: 'container',
             layout: 'hbox',
+            fieldStyle:'margin-top:10px',
             items: [{
                 xtype: 'container',
                 flex: 1,
                 layout: 'anchor',
                 items: [
-                    // {
-                    //     xtype: 'comboxtaxtype',
-                    //     labelWidth: 120,
-                    //     displayField: 'nametax',
-                    //     name: 'idtax',
-                    //     id: 'cb_tax_id_po',
-                    //     listeners: {
-                    //         select: function(combo, record, index) {
-                    //             // alert(combo.getValue()); // Return Unitad States and no USA
-                    //             updateGridSalesOrder();
-                    //         }
-                    //     }
-                    // },
+                    {
+                        xtype: 'comboxtax',
+                        labelWidth: 120,
+                        displayField: 'nametax',
+                        name: 'idtax',
+                        id: 'cb_tax_id_po',
+                        listeners: {
+                            select: function(combo, record, index) {
+                                // alert(combo.getValue()); // Return Unitad States and no USA
+                                updateGridSalesOrder();
+                            }
+                        }
+                    },
                     //  {
                     //     xtype: 'comboxpaymentterm',
                     //     id: 'comboxpaymentSalesOrder',
