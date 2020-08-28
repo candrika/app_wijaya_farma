@@ -46,7 +46,6 @@ var storeGridStockCard = Ext.create('Ext.data.Store', {
 storeGridStockCard.on('beforeload', function(store, operation, eOpts) {
     operation.params = {
         'key':key,
-        'password':password,
         'idunit':idunit,
         'product_id':Ext.getCmp('product_id').getValue(),
         'startdate': Ext.getCmp('startdate_GridStockCard').getValue(),

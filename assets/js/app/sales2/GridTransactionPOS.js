@@ -107,7 +107,13 @@ Ext.define(dir_sys + 'sales2.GridTransactionPOS', {
                 },
                 {header: 'Price', dataIndex: 'price',  xtype:'numbercolumn', align:'right', minWidth: 125, hidden:true},
                 {header: 'Member Price', dataIndex: 'retail_price_member',  xtype:'numbercolumn', align:'right', minWidth: 125, hidden:true},
-                {header: 'Diskon', dataIndex: 'disc',  xtype:'numbercolumn', align:'right', minWidth: 125},            
+                {header: 'Diskon', dataIndex: 'disc',  xtype:'numbercolumn', align:'right', minWidth: 125,
+                    editor:{
+                        xtype:'numberfield',
+                        minValue:0,
+                        value:0
+                    }
+                },            
                 {
                     header: 'Total',
                     dataIndex: 'total',
@@ -162,6 +168,12 @@ Ext.define(dir_sys + 'sales2.GridTransactionPOS', {
                         width:197,
                         labelWidth:80,
                         value:0
+                    },{
+                        xtype:'displayfield',
+                        id:'footer_ppn_pos',
+                        fieldLabel:'PPN',
+                        width:197,
+                        value:0
                     }
                 ]
             },
@@ -201,7 +213,7 @@ Ext.define(dir_sys + 'sales2.GridTransactionPOS', {
                         handler: function() {
                             Ext.getCmp('other_fee_amount_poswindow').setValue(0);
                             update_pos_footer();
-                            set_member_buyer_pos();
+                            // set_member_buyer_pos();
                         }
                     },  
                     '->',

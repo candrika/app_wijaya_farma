@@ -275,7 +275,6 @@ function setNoArticle(idunit, fieldpk, fieldname, table, el, prefix, extraparams
 function update_pos_footer(){
     console.log('update_pos_footer');
 
-    // var no_member = Ext.getCmp('no_member').getValue();
     var search_pos_field = Ext.getCmp('search_pos');
     search_pos_field.setValue(null);
     search_pos_field.focus();
@@ -288,20 +287,12 @@ function update_pos_footer(){
     var grandtotal = 0;
     var discount = str_replace(".", "",form.findField("total_disc").getValue())*1;
     var other_fee =  str_replace(".", "",form.findField("other_fee").getValue())*1;
+   
     Ext.each(grid_trx.data.items, function(obj, i) {
         var price = str_replace(".00", "",obj.data.price)*1;
-        // var retail_price_member = str_replace(".00", "",obj.data.retail_price_member)*1;
-        var disc = 0;
+        var disc = obj.data.disc;
         var get_record = grid_trx.getAt(i);
         var new_qty = obj.data.qty;
-
-        // if(no_member!=null && no_member!=''){
-        //     console.log(price+' '+retail_price_member)
-        //     disc = price-retail_price_member;
-        // } else {
-        //     disc = 0;
-        // }
-        console.log('('+price+'-'+disc+')*'+new_qty+')');
 
         var total = (price-disc)*new_qty;
         var st = price*new_qty;
@@ -313,12 +304,9 @@ function update_pos_footer(){
         total_disc+=(disc*new_qty);
     });
 
-    console.log('('+subtotal+'+'+other_fee+'-'+total_disc+')+'+tax);
     var total = (subtotal+other_fee-total_disc)+tax;
-    // Ext.getCmp("df_subtotal").setValue(tes);
     Ext.getCmp('footer_subtotal_pos').setValue(renderNomor(subtotal));
     Ext.getCmp('footer_discount_pos').setValue(renderNomor(total_disc));
-    // form.findField("df_tax").setValue(renderNomor(tax));
     form.findField("total_amount").setValue(total);
     form.findField("grandtotal").setValue(renderNomor(total));
 }

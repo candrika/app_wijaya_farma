@@ -64,7 +64,7 @@ function load_data_purchase(purchase_id,opt) {
                 Ext.getCmp('purchase_id_po').setValue(null);
                 //form.findField('status').setValue(data_purchase.invoice_status*1);
             } else {
-                    // var purchaseitem_id = item.purchase_item_id*1;
+                // var purchaseitem_id = item.purchase_item_id*1;
                 Ext.getCmp('purchase_id_po').setValue(data_purchase.purchase_id*1);
                 // var start_date = new Date();
                 // // var end_date  = start_date.setMonth(start_date.getMonth()+1);
@@ -200,7 +200,7 @@ function updateGridPurchasev3() {
         //     //include tax
         //      var total_per_row = (total - diskon);
         // } else {
-        //     var total_per_row = (total - diskon)+tax;
+            var total_per_row = (total - diskon)+tax;
         // }
 
        obj.set('total', total_per_row);
@@ -421,13 +421,13 @@ function updateGridPurchaseOrderv3() {
     Ext.each(storeGridItemPurchaseOrder.data.items, function(obj, i) {
         var total = obj.data.qty * (obj.data.price);
         var diskon = (total / 100) * obj.data.disc;
-        // var tax = total*(obj.data.rate*1/100);
+        var tax = total*(obj.data.rate*1/100);
 
         // if(isIncludeTax){
         //     //include tax
         //      var total_per_row = (total - diskon);
         // } else {
-        //     var total_per_row = (total - diskon)+tax;
+            var total_per_row = (total - diskon)+tax;
         // }
 
        obj.set('total', total_per_row);

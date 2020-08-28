@@ -275,7 +275,7 @@ Ext.define(dir_sys + 'purchasing.windowPopupPurchaseMultiPayment', {
                             Ext.getCmp('form_PurchaseMultiPayment').getForm().reset();
                             Ext.getCmp('windowPopupPurchaseMultiPayment').hide();
                             
-                            setHeaderPurchaseSummary();
+                            // setHeaderPurchaseSummary();
 
                           	
                           	Ext.getCmp('PurchasingGridID').getStore().load();
@@ -284,7 +284,7 @@ Ext.define(dir_sys + 'purchasing.windowPopupPurchaseMultiPayment', {
                             Ext.Msg.alert('Success', action.result ? action.result.message : 'No response');
                             Ext.getCmp('form_PurchaseMultiPayment').getForm().reset();
                             Ext.getCmp('windowPopupPurchaseMultiPayment').hide();
-                            setHeaderPurchaseSummary();
+                            // setHeaderPurchaseSummary();
 
                             
                             Ext.getCmp('PurchasingGridID').getStore().load();

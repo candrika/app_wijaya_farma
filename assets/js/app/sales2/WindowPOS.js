@@ -190,16 +190,10 @@ Ext.define(dir_sys + 'sales2.WindowPOS', {
     alias: 'widget.WindowPOS',
     id: 'windowPopupWindowPOS',
     title: 'Kasir Penjualan',
-    // header: {
-    //     titlePosition: 2,
-    //     titleAlign: 'center'
-    // },
     closable: true,
     modal: true,
     closeAction: 'hide',
     maximizable: true,
-    // autoWidth: true,
-    // autoHeight: true,
     height:panelH,
     width:panelW,
     layout: 'fit',
@@ -226,10 +220,9 @@ Ext.define(dir_sys + 'sales2.WindowPOS', {
         handler: function() {
             var form_payment = Ext.getCmp('formPaymentPOS').getForm();
 
-            // submit_pos_data();
             var form = Ext.getCmp('EntryTransactionPOS').getForm();
             var total = str_replace('.','',form.findField("grandtotal").getValue())*1;
-// alert(total)
+
             Ext.getCmp('btnPaymentPOS').enable();    
             if(total>0){
 
@@ -254,8 +247,6 @@ Ext.define(dir_sys + 'sales2.WindowPOS', {
                 form_payment.findField("total_sales").setValue(renderNomor(total));
                 form_payment.findField("payment_amount").setValue(0);
                 form_payment.findField("change_amount").setValue(0);
-                // var search_pos_field = Ext.getCmp('search_pos');
-                // search_pos_field.setValue(null);
                 form_payment.findField("payment_amount").focus();
             } else {
                 Ext.Msg.alert('Bayar', 'Tentukan produk terlebih dahulu');
@@ -273,21 +264,17 @@ function click_to_basket(record){
     var price = record.data.price*1;
     
     if(grid_trx.getCount()==0){
-        // if(no_member!=null && no_member!=''){
-        //     disc = price-price_member;
-        // }
+        
         var total = price-disc;
         var rec = new GridTransactionPOSModel({
             product_id: record.data.product_id,
             product_name: record.data.product_name,
             price: price,
-            // retail_price_member: price_member,
             qty: 1,
             disc: disc,
             total: total
         });
-        // console.log(rec);
-        // var grid = Ext.getCmp('GridTransactionPOSID');
+        
         grid_trx.insert(0, rec);
     } else {
 
@@ -296,10 +283,6 @@ function click_to_basket(record){
         console.log(match)
         if(match == -1) {
             // ...add the bookmark
-            // alert('ga ada');
-            // if(no_member!=null && no_member!=''){
-            //     disc = price-price_member;
-            // }
             var total = price-disc;
 
             var rec = new GridTransactionPOSModel({
@@ -312,25 +295,16 @@ function click_to_basket(record){
                 });
             grid_trx.insert(0, rec);
         } else {
-            // console.log(match)
-             // alert('ada'+match.get('qty'));
-                // var get_record = grid_trx.getAt(i);
-                // var new_qty = obj.data.qty+1;
-                // get_record.set("qty",new_qty);
-                // get_record.set("total",new_qty+record.data.price);
-            Ext.each(grid_trx.data.items, function(obj, i) {
+                // console.log(match)
+                // alert('ada'+match.get('qty'));
+                Ext.each(grid_trx.data.items, function(obj, i) {
                 console.log(obj.data.product_id+'=='+record.data.product_id)
                 if(obj.data.product_id*1==record.data.product_id*1){
                     //udah ada. jadi ditambah qty dan totalnya
-                    // if(no_member!=null && no_member!=''){
-                    //     disc = (record.data.price*1)-(record.data.price_member*1);
-                    // }
                     var total = price-disc;
-                    // console.log('ada');
                     var get_record = grid_trx.getAt(i);
                     var new_qty = obj.data.qty+1;
                     get_record.set("qty",new_qty);
-                    // get_record.set("total",new_qty+record.data.price);
                     get_record.set("total",new_qty+total);
                 } 
             });
@@ -338,5 +312,4 @@ function click_to_basket(record){
     }
 
     update_pos_footer();
-    set_member_buyer_pos();
 }

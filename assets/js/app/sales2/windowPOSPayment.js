@@ -96,15 +96,11 @@ Ext.define(dir_sys + 'sales2.windowPOSPayment', {
     id: 'windowPOSPayment',
     title: 'Pembayaran',
     header: {
-        // titlePosition: 2,
         titleAlign: 'center'
     },
     closable: true,
     closeAction: 'hide',
-//    autoWidth: true,
-    // width: 870,
     modal:true,
-    // height: 450,
     layout: 'fit',
     border: false,
     items: [formPaymentPOS]

@@ -489,7 +489,7 @@ Ext.define(dir_sys + 'purchasing.WindowEntryPurchasingOrder', {
                         due_date: Ext.getCmp('duedate_po').getSubmitValue(),
                         status: Ext.getCmp('cb_purchase_invoice_status').getValue(),
                         memo: Ext.getCmp('memoPurchaseOrder').getValue(),
-                        include_tax: Ext.getCmp('include_tax_po').getValue()*1,
+                        // include_tax: Ext.getCmp('include_tax_po').getValue()*1,
                         freight: Ext.getCmp('freightPurchaseOrder').getValue(),
                         customer_type: Ext.getCmp('customer_type_po').getValue(),
                         noinvoicePurchasOrder:Ext.getCmp('noinvoicePurchasOrder').getValue(),
