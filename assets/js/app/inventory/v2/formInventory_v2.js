@@ -144,7 +144,7 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
                             {
                                 xtype: 'textfield',
                                 name: 'coa_purchase_name',
-                                allowBlank: false,
+                                // allowBlank: false,
                                 fieldLabel: 'Akun Pembelian',
                                 listeners: {
                                     render: function(component) {
@@ -270,7 +270,7 @@ Ext.define(dir_sys + 'inventory.v2.formInventory_v2',{
                             {
                                 xtype: 'textfield',
                                 name: 'coa_sales_name',
-                                allowBlank: false,
+                                // allowBlank: false,
                                 fieldLabel: 'Akun Penjualan',
                                 listeners: {
                                     render: function(component) {
