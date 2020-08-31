@@ -509,7 +509,7 @@ class inventory extends MY_Controller {
         $getWorksheetName = $xlsx->getWorksheetName();
 
         $val = $xlsx->rows(1);
-        // print_r($val);
+        // print_r($val);die;
         $start_row = 1;
 
         if($this->validate_import_opname($val,$start_row)){
@@ -526,7 +526,7 @@ class inventory extends MY_Controller {
                 $rq = $q->row();
                 // print_r($val[$start_row]);
 
-                $variance = $val[$start_row]['5'] - $rq->stock_available;
+                $variance = $val[$start_row]['4'] - $rq->stock_available;
 
                 if(isset($val[$start_row]['3'])){
                     $location_name = $val[$start_row]['3'];
@@ -534,8 +534,8 @@ class inventory extends MY_Controller {
                     $location_name = "";
                 }
 
-                if(isset($val[$start_row]['6'])){
-                    $note = $val[$start_row]['6'];
+                if(isset($val[$start_row]['5'])){
+                    $note = $val[$start_row]['5'];
                 }else{
                     $note = "";
                 }
@@ -543,11 +543,11 @@ class inventory extends MY_Controller {
                 $data_opname[$i]['stock_opname_id'] = $this->input->post('stock_opnameImport_id');
                 $data_opname[$i]['product_id'] = $rq->product_id;
                 $data_opname[$i]['product_no'] = $val[$start_row]['0'];
-                $data_opname[$i]['no_barcode'] = $val[$start_row]['1'];
-                $data_opname[$i]['product_name'] = $val[$start_row]['2'];
+                $data_opname[$i]['no_barcode'] = isset($val[$start_row]['1'])?$val[$start_row]['1']:null;
+                $data_opname[$i]['product_name'] = isset($val[$start_row]['2'])?$val[$start_row]['2']:null;
                 $data_opname[$i]['location_name'] = $location_name;
                 $data_opname[$i]['current_stock'] = $rq->stock_available;
-                $data_opname[$i]['adjustment_stock'] = $val[$start_row]['5'];
+                $data_opname[$i]['adjustment_stock'] = $val[$start_row]['4'];
                 $data_opname[$i]['variance'] = $variance;
                 $data_opname[$i]['notes'] = $note;
                 
@@ -593,7 +593,7 @@ class inventory extends MY_Controller {
             }
 
             /////
-            if(isset($d) && $d['1']!=''){
+            if(isset($d) && isset($d['1']) && $d['1']!=''){
                 $kode = strval($d['1']);
                 $q = $this->db->get_where('product',array('no_barcode'=>$kode,'deleted'=>0,'idunit'=>$idunit));
                 
