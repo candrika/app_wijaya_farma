@@ -254,7 +254,7 @@ class inventory extends MY_Controller {
                     $data_product[$i]['inventory_class_id'] = $val[$start_row][3];
                     $data_product[$i]['stock_available'] = $val[$start_row][4];
                     $data_product[$i]['buy_price'] = $val[$start_row][5];
-                    $data_product[$i]['retail_price'] = $val[$start_row][6];
+                    $data_product[$i]['retail_price'] = $val[$start_row][7];
                     $data_product[$i]['idunit'] = $this->session->userdata('idunit');
                     $start_row++;
                     $i++;
