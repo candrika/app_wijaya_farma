@@ -70,7 +70,7 @@ class MY_Controller extends CI_Controller{
         $this->smarty->assign('idunit',  $this->session->userdata('idunit'));
         $this->smarty->assign('idcompany',  $this->session->userdata('idcompany'));
         $this->smarty->assign('periode',  $this->session->userdata('periode'));
-        $this->smarty->assign('key',$this->session->userdata('api_key'));
+        $this->smarty->assign('key',base64_encode($this->session->userdata('username').':'.$this->session->userdata('password')));
         $this->smarty->assign('password',  $this->session->userdata('password'));
         $this->smarty->assign('auth_basic', 'Basic '.$this->session->userdata('api_key'));
         
